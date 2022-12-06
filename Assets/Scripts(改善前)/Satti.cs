@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Satti : MonoBehaviour
 {
-
-    [SerializeField] private AudioSource satti;
-    [SerializeField] GameObject BGM;
+    AudioSource satti;
+    GameObject BGM;
     private void Start()
     {
         satti = GetComponent<AudioSource>();
-        if(satti == null)
-        {
-            satti = BGM.GetComponent<AudioSource>();
-        }
+        satti = BGM.GetComponent<AudioSource>();
     }
     private void OnTriggerEnter(Collider other)
     {

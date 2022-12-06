@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
             // 入力方向に滑らかに回転させる
             Quaternion targetRotation = Quaternion.LookRotation(dir);
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targetRotation, Time.deltaTime * m_turnSpeed);  // Slerp を使うのがポイント
+            this.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * m_turnSpeed);  // Slerp を使うのがポイント
 
             Vector3 velo = dir.normalized * _moveSpeed; // 入力した方向に移動する
             velo.y = _rb.velocity.y;   // ジャンプした時の y 軸方向の速度を保持する
