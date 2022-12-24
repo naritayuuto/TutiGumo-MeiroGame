@@ -5,26 +5,28 @@ using UnityEngine;
 public class PlayerFind : MonoBehaviour
 {
     bool _playerFind = false;
-    MusicManager musicM;
+    MusicManager _musicM;
     public bool _PlayerFind { get => _playerFind; set => _playerFind = value; }
 
     private void Start()
     {
-        musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        _musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             _playerFind = true;
-            musicM.PlayBGM(MusicManager.BGM.PlayerFind);
+            _musicM.Bgm = MusicManager.BGM.PlayerFind;
+            _musicM.PlayBGM(_musicM.Bgm);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            musicM.PlayBGM(MusicManager.BGM.playerPerception);
+            _musicM.Bgm = MusicManager.BGM.playerPerception;
+            _musicM.PlayBGM(_musicM.Bgm);
         }
     }
 }

@@ -21,16 +21,17 @@ public class WanderingSpider : MonoBehaviour
     Vector3[] points;
     GameObject player = null;
     NavMeshAgent agent;
-    MusicManager musicM;
+    MusicManager _musicM;
     PlayerFind playerFind;
     Animator anim = default;
+    [Tooltip("playerを見つけたらTrue")]
     bool playerPerception = false;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
-        musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        _musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
         playerFind = GetComponentInChildren<PlayerFind>();
     }
 
@@ -48,7 +49,11 @@ public class WanderingSpider : MonoBehaviour
             else
             {   
                 countTime += Time.deltaTime;
-                musicM.PlayBGM(MusicManager.BGM.playerPerception);
+                if (_musicM.Bgm != MusicManager.BGM.playerPerception && _musicM.Bgm != MusicManager.BGM.PlayerFind)
+                {
+                    _musicM.Bgm = MusicManager.BGM.playerPerception;
+                    _musicM.PlayBGM(_musicM.Bgm);
+                }
                 mode = 1;
             }
         }
@@ -67,18 +72,7 @@ public class WanderingSpider : MonoBehaviour
 
             case 1:
                     playerPerception = true;
-                    agent.destination = player.transform.position;//プレイヤーに向かって進む	
-                if (countTime >= trackingTime)
-                {
-                   if(Vector3.Distance(transform.position, player.transform.position) < dis)
-                    {
-                        playerPerception = false;
-                        if (!playerFind._PlayerFind)
-                        {
-                            musicM.PlayBGM(MusicManager.BGM.Title);
-                        }
-                    }
-                }
+                    agent.destination = player.transform.position;//プレイヤーに向かって進む
                 break;
         }
     }

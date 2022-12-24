@@ -6,18 +6,21 @@ public class PoisonBless : MonoBehaviour
 {
     [SerializeField] GameObject bless;
     [SerializeField] Transform muzzle;
+    [SerializeField] SceneLoader _sceneLoader;
     float count = 0;
-    float Descount = 1.8f;
+    [Tooltip("")]
+    float deathTime = 1.8f;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            count += Time.deltaTime;
-            Instantiate(bless, muzzle.position, this.transform.rotation);
-            if(count >Descount)
-            {
-                Destroy(bless.gameObject);
-            }
+            //count += Time.deltaTime;
+            //Instantiate(bless, muzzle.position, transform.rotation);
+            //if(count > deathTime)
+            //{
+            _sceneLoader.LoadScene(SceneLoader.State.Dead);
+            //Destroy(bless.gameObject);
+            //}
         }
     }
 }

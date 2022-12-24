@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField,Header("獲得、ボタン")]
     private AudioSource _SE;
-    [SerializeField]
+    [SerializeField,Header("タイトル、ステージ、察知、見つけた、クリア、死")]
     private AudioSource _BGM;
-    [SerializeField]
-    private AudioSource PlayerSource;
     [SerializeField]
     private AudioClip[] BGMClips;
     [SerializeField]

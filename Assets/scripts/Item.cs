@@ -4,14 +4,15 @@ using UnityEngine.UI;
 using UnityEngine;
 public class Item : MonoBehaviour
 {
-    private int count1 = 100;
+    private int count = 100;
     MusicManager musicM;
     public Text scoretext;
     Text text;
-    public int ItemCount { get => count1; set => count1 = value; }
+    public int ItemCount { get => count; set => count = value; }
 
     void Start()
     {
+        musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
         Setscore();
     }
     void OnTriggerEnter(Collider other)
@@ -19,7 +20,8 @@ public class Item : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             ItemCount -= 1;
-            //musicM.PlaySE(MusicManager.SE.Item);
+            musicM.Se = MusicManager.SE.Item;
+            musicM.PlaySE(musicM.Se);
             Destroy(other.gameObject);
         }
         Setscore();
