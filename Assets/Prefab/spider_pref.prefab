@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1329958644}
   - component: {fileID: 1329958643}
   - component: {fileID: 1329958645}
-  - component: {fileID: 1886253668}
+  - component: {fileID: 5060497379898801152}
   m_Layer: 8
   m_Name: bloom
   m_TagString: Untagged
@@ -124,7 +124,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.064972, y: 11.445717, z: 23.321526}
   m_Center: {x: -0.76560974, y: 3.3178582, z: 0}
---- !u!114 &1886253668
+--- !u!114 &5060497379898801152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1329958642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a502faa4bc6b8e742ad332ab982d71fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 46973fd06997378439860c7c1c3aec1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1013175443895534
@@ -1225,7 +1225,6 @@ GameObject:
   - component: {fileID: 4251409082942358}
   - component: {fileID: 95681433750800818}
   - component: {fileID: 1440749329}
-  - component: {fileID: 645420437}
   m_Layer: 0
   m_Name: spider_pref
   m_TagString: Untagged
@@ -1294,25 +1293,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &645420437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715103906888602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0809c73d6d4b374d853de7095be920b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dis: 5
-  playerFindDis: 15
-  trackingTime: 30
-  points:
-  - {x: 245, y: 0, z: 250}
-  - {x: 135, y: 0, z: 235}
-  - {x: 245, y: 0, z: 150}
 --- !u!1 &1719841372004032
 GameObject:
   m_ObjectHideFlags: 0
