@@ -20,18 +20,19 @@ public class WanderingSpider : MonoBehaviour
     [SerializeField,Tooltip("徘徊する場所")]
     Vector3[] points;
     GameObject player = null;
-    NavMeshAgent agent;
+    NavMeshAgent _agent;
     MusicManager _musicM;
     PlayerFind playerFind;
-    Animator anim = default;
+    Animator _anim = default;
     [Tooltip("playerを見つけたらTrue")]
-    bool playerPerception = false;
+    bool _playerPerception = false;
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<NavMeshAgent>();
         player = GameObject.Find("Player");
         _musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        _anim = GetComponent<Animator>();
         playerFind = GetComponentInChildren<PlayerFind>();
     }
 
@@ -41,10 +42,17 @@ public class WanderingSpider : MonoBehaviour
         Vector3 pos = points[pointsNumber];
         if (player)
         {
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance > playerFindDis)
+            float distance = Vector3.Distance(transform.position, player.transform.position);//自身とplayerの距離
+            if (distance > playerFindDis)//playerを見つけられる距離より、距離が離れていたら
             {
-                mode = playerPerception ? 1 : 0;
+                if(_playerPerception)//playerを見つけていたら
+                {
+                    countTime = 0;
+                    _musicM.Bgm = MusicManager.BGM.Stage;
+                    _musicM.PlayBGM(_musicM.Bgm);
+                    _playerPerception = false;
+                }
+                mode = 0;
             }
             else
             {   
@@ -67,19 +75,26 @@ public class WanderingSpider : MonoBehaviour
                     pointsNumber++;
                     pointsNumber = pointsNumber % points.Length;
                 }
-                agent.SetDestination(pos);
+                _agent.SetDestination(pos);
                 break;
 
             case 1:
-                    playerPerception = true;
-                    agent.destination = player.transform.position;//プレイヤーに向かって進む
+                    _playerPerception = true;
+                    _agent.destination = player.transform.position;//プレイヤーに向かって進む
                 break;
         }
     }
 
     public void PlayerDead()
     {
-        playerPerception = false;
+        _playerPerception = false;
         player = null;
+    }
+    private void LateUpdate()
+    {
+        if(_anim)
+        {
+            _anim.SetFloat("Speed", _agent.velocity.magnitude);
+        }
     }
 }

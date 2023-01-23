@@ -25,8 +25,9 @@ public class MusicManager : MonoBehaviour
     }
 
     public enum BGM
-    {
-        Title = 0,
+    {   
+        None = -1,
+        Title,
         Stage,
         playerPerception,
         PlayerFind,
