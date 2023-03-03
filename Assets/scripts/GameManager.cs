@@ -5,13 +5,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance = default;
+    [Tooltip("プレイヤーのオブジェクト")]
+    GameObject _player = null;
 
-    PlayerController _player = null;
+    PlayerController _playerController = null;
 
     Item _item = null;
 
     public static GameManager Instance { get => _instance; }
-    public PlayerController Player { get => _player;}
+
+    public GameObject Player { get => _player; }
+    public PlayerController PlayerController { get => _playerController; }
     public Item Item { get => _item;}
 
     // Start is called before the first frame update
@@ -25,13 +29,9 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerController = _player.GetComponent<PlayerController>();
+        _item = _player.GetComponent<Item>();
     }
-    public void PlayerSet(PlayerController player)
-    {
-        _player = player;
-    }
-    public void ItemSet(Item item)
-    {
-        _item = item;
-    }
+
 }
