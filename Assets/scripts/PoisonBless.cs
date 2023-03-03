@@ -4,23 +4,38 @@ using UnityEngine;
 
 public class PoisonBless : MonoBehaviour
 {
-    [SerializeField] GameObject bless;
-    [SerializeField] Transform muzzle;
-    [SerializeField] SceneLoader _sceneLoader;
-    float count = 0;
-    [Tooltip("")]
-    float deathTime = 1.8f;
-    private void OnTriggerEnter(Collider other)
+    private float _count = 0;
+    [SerializeField, Tooltip("プレイヤーを倒すまでにかかる秒数"), Header("プレイヤーを倒すまでにかかる秒数")]
+    float _deathTime = 1.8f;
+    [Tooltip("プレイヤーが当たり判定内にいる場合True")]
+    bool _playerStay = false;
+    [SerializeField]
+    ParticleSystem _bless;
+    [SerializeField]
+    Transform _muzzle;
+    [SerializeField]
+    SceneLoader _sceneLoader;
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            //count += Time.deltaTime;
-            //Instantiate(bless, muzzle.position, transform.rotation);
-            //if(count > deathTime)
-            //{
-            _sceneLoader.LoadScene(SceneLoader.State.Dead);
-            //Destroy(bless.gameObject);
-            //}
+            _playerStay = true;
+            _count += Time.deltaTime;
+            _bless.Play();
+            //Instantiate(_bless, _muzzle.position, transform.rotation);
+            if (_count > _deathTime)
+            {
+                _sceneLoader.LoadScene(SceneLoader.State.Dead);
+                _bless.Stop();
+                //Destroy(_bless.gameObject);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            _playerStay = false;
         }
     }
 }
