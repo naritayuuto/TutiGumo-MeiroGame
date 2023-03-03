@@ -8,20 +8,18 @@ using DG.Tweening;
 public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定を持つObjectに付けること
 {
 
-    [SerializeField,Header("ゲームシーン、ゴールシーン、デッドシーン、タイトルシーン")] 
-    string[] sceneName;
+    [SerializeField,Header("ゲームシーン、ゴールシーン、デッドシーン、タイトルシーンの順に名前を入力"),Tooltip("移動先のシーン名")] 
+    string[] _sceneName;
     [SerializeField]
-    float fadeSpeed = 1f;
+    float _fadeSpeed = 1f;
     State _state = State.None;
     /// <summary>ロード出来るかどうか</summary>
-    bool isLoadStarted = false;
+    bool _isLoadStarted = false;
     [SerializeField] 
-    Image fadePanel = null;
+    Image _fadePanel = null;
     /// <summary>何秒で色を変えるか</summary>
-    [SerializeField]
-    Item item;
-    [SerializeField]
-    GameObject player = null;
+    [SerializeField,Header("プレイヤーが持っている")]
+    Item _item;
 
     public enum State
     {
@@ -34,38 +32,36 @@ public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定�
 
     void Start()
     {
-        //player = GameObject.Find("Player");
-        //item = player.GetComponent<Item>();
     }
     // Update is called once per frame
     void Update()
     {
-        if(isLoadStarted)
+        if(_isLoadStarted)
         {
             LoatSceneState(_state);
         }
     }
     void OnTriggerEnter(Collider other)//ゴール用
     {
-        if (other.CompareTag("Player") && item.ItemCount <= 0)
+        if (other.CompareTag("Player") && _item.ItemCount <= 0)
         {
             LoadScene(State.Goal);
         }
     }
-    public void StageLoad()//GameOver用
+    public void StageLoad()//
     {
         _state = State.Start;
-        isLoadStarted = true;
+        _isLoadStarted = true;
     }
     public void TitleLoad()//GameOver用
     {
         _state = State.Title;
-        isLoadStarted = true;
+        _isLoadStarted = true;
     }
     public void LoadScene(State state)
     {
         _state = state;
-        isLoadStarted = true;
+        _isLoadStarted = true;
     }
 
     void LoatSceneState(State state)
@@ -74,16 +70,16 @@ public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定�
         {
             return;
         }
-        if (fadePanel)
+        if (_fadePanel)
         {
-            fadePanel.DOColor(Color.black, fadeSpeed).OnComplete(() => SceneManager.LoadScene(sceneName[(int)state]));
-            isLoadStarted = false;
+            _fadePanel.DOColor(Color.black, _fadeSpeed).OnComplete(() => SceneManager.LoadScene(_sceneName[(int)state]));
+            _isLoadStarted = false;
             Debug.Log("シーン移動完了しました");
         }
         else
         {
-            SceneManager.LoadScene(sceneName[(int)state]);
-            isLoadStarted = false;
+            SceneManager.LoadScene(_sceneName[(int)state]);
+            _isLoadStarted = false;
         }
     }
 }
