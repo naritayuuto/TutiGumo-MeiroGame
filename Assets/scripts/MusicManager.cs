@@ -1,6 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum BGM
+{
+    None = -1,
+    Title,
+    Stage,
+    playerPerception,
+    PlayerFind,
+    Goal,
+    Dead
+}
+public enum SE
+{
+    None = -1,
+    Item,
+    Butten
+}
 public class MusicManager : MonoBehaviour
 {
     [SerializeField,Header("älìæÅAÉ{É^Éì")]
@@ -24,76 +40,41 @@ public class MusicManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public enum BGM
-    {   
-        None = -1,
-        Title,
-        Stage,
-        playerPerception,
-        PlayerFind,
-        Goal,
-        Dead
-    }
-    public enum SE
-    {
-        None =-1,
-        Item,
-        Butten
-    }
-
     public void PlaySE(SE se)
     {
-        int seIndex = 0;
-        switch (se)
+        //switch (se)
+        //{
+        //    case SE.None:
+        //        break;
+        //    case SE.Item:
+        //        {
+        //            seIndex = (int)se;
+        //            break;
+        //        }
+        //    case SE.Butten:
+        //        {
+        //            seIndex = (int)se;
+        //            break;
+        //        }
+        //}
+        if (se != SE.None)
         {
-            case SE.None:
-                break;
-            case SE.Item:
-                {
-                    seIndex = (int)se;
-                    break;
-                }
-            case SE.Butten:
-                {
-                    seIndex = (int)se;
-                    break;
-                }
+            _se = se;
+            int seIndex = 0;
+            seIndex = (int)se;
+            _SE.clip = SEClips[seIndex];
+            _SE.Play();
         }
-        _SE.clip = SEClips[seIndex];
-        _SE.Play();
     }
     public void PlayBGM(BGM bgm)
     {
-        int bgmIndex = 0;
-        switch (bgm)
+        if (bgm != BGM.None)
         {
-            case BGM.Title:
-                {
-                    bgmIndex = (int)bgm;
-                    break;
-                }
-            case BGM.Stage:
-                {
-                    bgmIndex = (int)bgm;
-                    break;
-                }
-            case BGM.PlayerFind:
-                {
-                    bgmIndex = (int)bgm;
-                    break;
-                }
-            case BGM.Goal:
-                {
-                    bgmIndex = (int)bgm;
-                    break;
-                }
-            case BGM.Dead:
-                {
-                    bgmIndex = (int)bgm;
-                    break;
-                }
+            _bgm = bgm;
+            int bgmIndex = 0;
+            bgmIndex = (int)bgm;
+            _BGM.clip = BGMClips[bgmIndex];
+            _BGM.Play();
         }
-        _BGM.clip = BGMClips[bgmIndex];
-        _BGM.Play();
     }
 }
