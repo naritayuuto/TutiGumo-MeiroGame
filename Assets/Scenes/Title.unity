@@ -3501,7 +3501,7 @@ GameObject:
   - component: {fileID: 1079302694}
   - component: {fileID: 1079302695}
   m_Layer: 5
-  m_Name: "\u30B9\u30BF\u30FC\u30C8"
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3587,7 +3587,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1079302695}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -3648,15 +3648,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28b79c80dda58c40bcecd8504763ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName:
+  _sceneName:
   - Stage
   - Goal
   - Gameover
   - Title
-  fadeSpeed: 1.5
-  fadePanel: {fileID: 855523608}
-  item: {fileID: 0}
-  player: {fileID: 0}
+  _fadeSpeed: 1
+  _fadePanel: {fileID: 855523608}
+  _item: {fileID: 0}
 --- !u!82 &1079302695
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3667,7 +3666,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 72bedd4e595aefa409769682d2fad944, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 867360029c435c8439d864302367a4d8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3675,7 +3674,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 84
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

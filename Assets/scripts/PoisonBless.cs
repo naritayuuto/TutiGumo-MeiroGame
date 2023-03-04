@@ -23,7 +23,7 @@ public class PoisonBless : MonoBehaviour
             _count += Time.deltaTime;
             _bless.Play();
             //Instantiate(_bless, _muzzle.position, transform.rotation);
-            if (_count > _deathTime)
+            if (_count >= _deathTime)
             {
                 _sceneLoader.LoadScene(SceneLoader.State.Dead);
                 _bless.Stop();

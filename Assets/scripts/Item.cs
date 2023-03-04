@@ -4,40 +4,41 @@ using UnityEngine.UI;
 using UnityEngine;
 public class Item : MonoBehaviour
 {
-    [SerializeField,Tooltip("獲得しなければならないアイテム数"),Header("獲得しなければならないアイテム数")]
-    int _count = 50;
+    [Tooltip("獲得しなければならないアイテム数")]
     int _maxItemCount = 0;
-    MusicManager _musicM;
+    [SerializeField,Tooltip("獲得しなければならないアイテム数の残り"),Header("獲得しなければならないアイテム数の残り")]
+    int _itemCount = 50;
     [SerializeField]
     Text _scoreText;
-    public int ItemCount { get => _count; set => _count = value; }
+    MusicManager _musicM;
+
+    public int ItemCount { get => _itemCount; set => _itemCount = value; }
 
     void Start()
     {
-        _musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
-        _maxItemCount = _count;
+        _musicM = GameManager.Instance.MusicManager;
+        _maxItemCount = _itemCount;
         Setscore();
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Item"))
         {
-            _count -= 1;
-            _musicM.Se = MusicManager.SE.Item;
-            _musicM.PlaySE(_musicM.Se);
+            _itemCount -= 1;
+            _musicM.PlaySE(SE.Item);
             other.gameObject.SetActive(false);
         }
         Setscore();
     }
     void Setscore()
     {
-        if (_count == _maxItemCount)
+        if (_itemCount == _maxItemCount)
         {
             _scoreText.text = string.Format("目の前の赤い球を集めよう");
         }
-        else if(0 < _count && _count < _maxItemCount)//１以上100未満
+        else if(0 < _itemCount && _itemCount < _maxItemCount)//１以上100未満
         {
-            _scoreText.text = string.Format("あと{0}個集めよう", _count);
+            _scoreText.text = string.Format("あと{0}個集めよう", _itemCount);
         }
         else
         {

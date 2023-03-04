@@ -10,23 +10,14 @@ public class PlayerFind : MonoBehaviour
 
     private void Start()
     {
-        _musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        _musicM = GameManager.Instance.MusicManager;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             _playerFind = true;
-            _musicM.Bgm = MusicManager.BGM.PlayerFind;
-            _musicM.PlayBGM(_musicM.Bgm);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            _musicM.Bgm = MusicManager.BGM.playerPerception;
-            _musicM.PlayBGM(_musicM.Bgm);
+            _musicM.PlayBGM(BGM.PlayerFind);
         }
     }
 }
