@@ -6,11 +6,11 @@ using UnityEngine.AI;
 /// <summary>徘徊する蜘蛛</summary>
 public class WanderingSpider : MonoBehaviour
 {
-    [SerializeField,Tooltip("目標との間隔、余裕を持った値にする")]
+    [SerializeField, Tooltip("目標との間隔、余裕を持った値にする")]
     float _dis = 5f;
-    [SerializeField, Tooltip("Playerとの間隔、余裕を持った値にする")]
-    float _playerFindDis = 5f;
-    [SerializeField,Tooltip("プレイヤーを追跡する時間")]
+    [SerializeField, Tooltip("Playerを察知出来る間隔、余裕を持った値にする")]
+    float _playerPerceptionDis = 5f;
+    [SerializeField, Tooltip("プレイヤーを追跡する時間")]
     float _trackingTime = 30f;
     float _countTime = 0f;
     [Tooltip("_pointsの要素数")]
@@ -20,20 +20,18 @@ public class WanderingSpider : MonoBehaviour
     [Tooltip("playerを見つけたらTrue")]
     bool _playerPerception = false;
     GameObject _player = null;
-    [SerializeField,Tooltip("徘徊する場所")]
+    [SerializeField, Tooltip("徘徊する場所")]
     Vector3[] _points;
     NavMeshAgent _agent;
     MusicManager _musicM;
-    PlayerFind _playerFind;
     Animator _anim = null;
     // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _player = GameManager.Instance.Player;
-        _musicM = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
+        _musicM = GameManager.Instance.MusicManager;
         _anim = GetComponent<Animator>();
-        _playerFind = GetComponentInChildren<PlayerFind>();
     }
 
     // Update is called once per frame
@@ -43,27 +41,53 @@ public class WanderingSpider : MonoBehaviour
         if (_player)
         {
             float distance = Vector3.Distance(transform.position, _player.transform.position);//自身とplayerの距離
-            if (distance > _playerFindDis)//playerを見つけられる距離より、距離が離れていたら
+            if(distance <= _playerPerceptionDis)//プレイヤーが近くにいたら
             {
-                if(_playerPerception)//playerを見つけていたら
+                _playerPerception = true;
+                if (_musicM.Bgm != BGM.playerPerception && _musicM.Bgm != BGM.PlayerFind)//他の蜘蛛がプレイヤーを察知していない、見つけていない場合
                 {
-                    _countTime = 0;
-                    _musicM.Bgm = MusicManager.BGM.Stage;
-                    _musicM.PlayBGM(_musicM.Bgm);
-                    _playerPerception = false;
-                }
-                _mode = 0;
-            }
-            else
-            {   
-                _countTime += Time.deltaTime;
-                if (_musicM.Bgm != MusicManager.BGM.playerPerception && _musicM.Bgm != MusicManager.BGM.PlayerFind)
-                {
-                    _musicM.Bgm = MusicManager.BGM.playerPerception;
-                    _musicM.PlayBGM(_musicM.Bgm);
+                    _musicM.PlayBGM(BGM.playerPerception);//察知のBGMに切り替え
                 }
                 _mode = 1;
             }
+            else
+            {
+                if (_playerPerception)//察知していたら
+                {
+                    _countTime += Time.deltaTime;
+                    if (_countTime >= _trackingTime)
+                    {
+                        _countTime = 0;
+                        _playerPerception = false;
+                        _musicM.PlayBGM(BGM.Stage);
+                        _mode = 0;
+                    }
+                }
+                else
+                {
+                    _mode = 0;
+                }
+            }
+            //if (distance > _playerFindDis)//playerを見つけられる距離より、距離が離れていたら
+            //{
+            //    if (_playerPerception)//playerが近くにいた（察知）場合、BGMが変更されているので
+            //    {
+            //        _countTime = 0;
+            //        _musicM.PlayBGM(BGM.Stage);
+            //        _playerPerception = false;
+            //    }
+            //    _mode = 0;
+            //}
+            //else
+            //{
+            //    _countTime += Time.deltaTime;
+            //    if (_musicM.Bgm != MusicManager.BGM.playerPerception && _musicM.Bgm != MusicManager.BGM.PlayerFind)
+            //    {
+            //        _musicM.Bgm = MusicManager.BGM.playerPerception;
+            //        _musicM.PlayBGM(_musicM.Bgm);
+            //    }
+            //    _mode = 1;
+            //}
         }
         switch (_mode)
         {
@@ -79,20 +103,14 @@ public class WanderingSpider : MonoBehaviour
                 break;
 
             case 1:
-                    _playerPerception = true;
-                    _agent.destination = _player.transform.position;//プレイヤーに向かって進む
+                _agent.SetDestination(_player.transform.position);//プレイヤーに向かって進む
                 break;
         }
     }
 
-    public void PlayerDead()
-    {
-        _playerPerception = false;
-        _player = null;
-    }
     private void LateUpdate()
     {
-        if(_anim)
+        if (_anim)
         {
             _anim.SetFloat("Speed", _agent.velocity.magnitude);
         }
