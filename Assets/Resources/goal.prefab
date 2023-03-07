@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2585354392224590026}
   - component: {fileID: 2585354392224590027}
   - component: {fileID: 2585354392224590028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: asiba (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 2585354393398626138}
   - component: {fileID: 2585354393398626139}
   - component: {fileID: 2585354393398626140}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: asiba (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 5310145435214428094}
   - component: {fileID: 4628118695888113551}
   - component: {fileID: 3198692009024169132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
