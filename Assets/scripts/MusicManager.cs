@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public enum BGM
 {
     None = -1,
     Title,
     Stage,
-    playerPerception,
-    PlayerFind,
     Goal,
-    Dead
+    Dead,
+    playerPerception,
+    PlayerFind
 }
 public enum SE
 {
@@ -19,44 +20,27 @@ public enum SE
 }
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField,Header("獲得、ボタン")]
+    public static MusicManager _instance = default;
+
+    [SerializeField]
     private AudioSource _SE;
-    [SerializeField,Header("タイトル、ステージ、察知、見つけた、クリア、死")]
+    [SerializeField]
     private AudioSource _BGM;
-    [SerializeField]
-    private AudioClip[] BGMClips;
-    [SerializeField]
+    [SerializeField, Header("獲得、ボタン")]
     private AudioClip[] SEClips;
+    [SerializeField, Header("タイトル、ステージ、クリア、死、察知、発見")]
+    private AudioClip[] BGMClips;
 
     BGM _bgm = BGM.Title;
     SE _se = SE.None;
     public BGM Bgm { get => _bgm; set => _bgm = value; }
     public SE Se { get => _se; set => _se = value; }
 
-
+    public static MusicManager Instance { get => _instance; }
     // Start is called before the first frame update
-    void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
 
     public void PlaySE(SE se)
     {
-        //switch (se)
-        //{
-        //    case SE.None:
-        //        break;
-        //    case SE.Item:
-        //        {
-        //            seIndex = (int)se;
-        //            break;
-        //        }
-        //    case SE.Butten:
-        //        {
-        //            seIndex = (int)se;
-        //            break;
-        //        }
-        //}
         if (se != SE.None)
         {
             _se = se;
@@ -75,6 +59,19 @@ public class MusicManager : MonoBehaviour
             bgmIndex = (int)bgm;
             _BGM.clip = BGMClips[bgmIndex];
             _BGM.Play();
+        }
+    }
+
+    public void PlaySE(int num)
+    {
+        SE se = (SE)num;
+        if (se != SE.None)
+        {
+            _se = se;
+            int seIndex = 0;
+            seIndex = (int)se;
+            _SE.clip = SEClips[seIndex];
+            _SE.Play();
         }
     }
 }

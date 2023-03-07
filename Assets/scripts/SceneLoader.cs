@@ -7,9 +7,6 @@ using DG.Tweening;
 
 public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定を持つObjectに付けること
 {
-
-    [SerializeField,Header("ゲーム、ゴール、デッド、タイトルの順"),Tooltip("移動先のシーン名")] 
-    string[] _sceneName;
     [SerializeField,Header("フェードにかかる時間"),Tooltip("フェードにかかる時間")]
     float _fadeSpeed = 1f;
     [Tooltip("フェードの準備が整ったらTrue")]    
@@ -20,10 +17,10 @@ public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定�
     public enum State
     {
         None = -1,
-        Start,
+        Title,
+        Stage,
         Goal,
-        Dead,
-        Title
+        Dead
     }
     // Update is called once per frame
     void Update()
@@ -35,7 +32,7 @@ public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定�
     }
     public void StageLoad()
     {
-        _state = State.Start;
+        _state = State.Stage;
         _isLoadStarted = true;
     }
     public void TitleLoad()
@@ -57,13 +54,13 @@ public class SceneLoader : MonoBehaviour//設計上ゴールの当たり判定�
         }
         if (_fadePanel)
         {
-            _fadePanel.DOColor(Color.black, _fadeSpeed).OnComplete(() => SceneManager.LoadScene(_sceneName[(int)state]));
+            _fadePanel.DOColor(Color.black, _fadeSpeed).OnComplete(() => SceneManager.LoadScene(GameManager.Instance.SceneName[(int)state]));
             _isLoadStarted = false;
             Debug.Log("シーン移動完了しました");
         }
         else
         {
-            SceneManager.LoadScene(_sceneName[(int)state]);
+            SceneManager.LoadScene(GameManager.Instance.SceneName[(int)state]);
             _isLoadStarted = false;
         }
     }
