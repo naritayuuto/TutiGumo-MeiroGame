@@ -55,6 +55,7 @@ public class WanderingSpider : MonoBehaviour
                 if (_playerPerception)//Ž@’m‚µ‚Ä‚¢‚½‚ç
                 {
                     _countTime += Time.deltaTime;
+                    _mode = 1;
                     if (_countTime >= _trackingTime)
                     {
                         _countTime = 0;
@@ -62,6 +63,7 @@ public class WanderingSpider : MonoBehaviour
                         _musicM.PlayBGM(BGM.Stage);
                         _mode = 0;
                     }
+
                 }
                 else
                 {
