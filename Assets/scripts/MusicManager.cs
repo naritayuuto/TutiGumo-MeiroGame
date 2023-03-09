@@ -44,9 +44,7 @@ public class MusicManager : MonoBehaviour
         if (se != SE.None)
         {
             _se = se;
-            int seIndex = 0;
-            seIndex = (int)se;
-            _SE.clip = SEClips[seIndex];
+            _SE.clip = SEClips[(int)se];
             _SE.Play();
         }
     }
@@ -55,9 +53,7 @@ public class MusicManager : MonoBehaviour
         if (bgm != BGM.None)
         {
             _bgm = bgm;
-            int bgmIndex = 0;
-            bgmIndex = (int)bgm;
-            _BGM.clip = BGMClips[bgmIndex];
+            _BGM.clip = BGMClips[(int)bgm];
             _BGM.Play();
         }
     }
@@ -68,9 +64,7 @@ public class MusicManager : MonoBehaviour
         if (se != SE.None)
         {
             _se = se;
-            int seIndex = 0;
-            seIndex = (int)se;
-            _SE.clip = SEClips[seIndex];
+            _SE.clip = SEClips[(int)se];
             _SE.Play();
         }
     }

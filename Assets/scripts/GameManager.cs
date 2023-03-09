@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance = default;
-
+    [SerializeField]
+    GameObject[] _enemys; 
     [Tooltip("プレイヤーのオブジェクト")]
     GameObject _player = null;
     PlayerController _playerController = null;
@@ -50,11 +51,19 @@ public class GameManager : MonoBehaviour
             _item = _player.GetComponent<Item>();
         }
     }
+
+    public void EnemyActive()
+    {
+        foreach(var enemy in _enemys)
+        {
+            enemy.SetActive(true);
+        }
+    }
     private void Start()
     {
-       for(int num = 0; num < _sceneName.Length; num++)
+        for (int num = 0; num < _sceneName.Length; num++)
         {
-            if(SceneManager.GetActiveScene().name == _sceneName[num])
+            if (SceneManager.GetActiveScene().name == _sceneName[num])
             {
                 _musicManager.PlayBGM((BGM)num);
                 break;
