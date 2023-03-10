@@ -9,7 +9,7 @@ public class WanderingSpider : MonoBehaviour
     [SerializeField, Tooltip("目標との間隔、余裕を持った値にする")]
     float _targetDis = 7f;
     [SerializeField, Tooltip("Playerを察知出来る間隔、余裕を持った値にする")]
-    float _playerPerceptionDis = 5f;
+    float _playerPerceptionDis = 12f;
     [SerializeField, Tooltip("プレイヤーを追跡する時間")]
     float _trackingTime = 30f;
     float _countTime = 0f;
