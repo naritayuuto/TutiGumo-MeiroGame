@@ -35,7 +35,9 @@ public class PoisonBless : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            _count = 0;
             _playerStay = false;
+            _bless.Stop();
         }
     }
 }
