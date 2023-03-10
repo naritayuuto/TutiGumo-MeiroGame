@@ -17,7 +17,10 @@ public class PlayerFind : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _playerFind = true;
-            _musicM.PlayBGM(BGM.PlayerFind);
+            if (_musicM.Bgm != BGM.PlayerFind)
+            {
+                _musicM.PlayBGM(BGM.PlayerFind);
+            }
         }
     }
 }
