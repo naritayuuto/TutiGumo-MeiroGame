@@ -16,7 +16,7 @@ public class WanderingSpider : MonoBehaviour
     [Tooltip("_pointsの要素数")]
     int _pointsNumber = 0;
     [Tooltip("0 == プレイヤー未発見、1 == プレイヤー発見")]
-    int _mode;
+    int _mode = 0;
     [Tooltip("playerを見つけたらTrue")]
     bool _playerPerception = false;
     GameObject _player = null;
@@ -45,6 +45,7 @@ public class WanderingSpider : MonoBehaviour
             float distance = Vector3.Distance(transform.position, _player.transform.position);//自身とplayerの距離
             if (distance <= _playerPerceptionDis)//プレイヤーが近くにいたら
             {
+                _countTime = 0;
                 _playerPerception = true;
                 if (_musicM.Bgm != BGM.playerPerception && _musicM.Bgm != BGM.PlayerFind)//他の蜘蛛がプレイヤーを察知していない、見つけていない場合
                 {
@@ -65,7 +66,6 @@ public class WanderingSpider : MonoBehaviour
                         _musicM.PlayBGM(BGM.Stage);
                         _mode = 0;
                     }
-
                 }
                 else
                 {
@@ -75,9 +75,7 @@ public class WanderingSpider : MonoBehaviour
         }
         switch (_mode)
         {
-
             case 0:
-
                 if (Vector3.Distance(transform.position, _targetPos) < _targetDis)
                 {
                     _pointsNumber++;
@@ -92,7 +90,6 @@ public class WanderingSpider : MonoBehaviour
                 break;
         }
     }
-
     private void LateUpdate()
     {
         if (_anim)

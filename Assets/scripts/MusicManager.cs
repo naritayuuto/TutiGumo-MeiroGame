@@ -48,16 +48,6 @@ public class MusicManager : MonoBehaviour
             _SE.Play();
         }
     }
-    public void PlayBGM(BGM bgm)
-    {
-        if (bgm != BGM.None)
-        {
-            _bgm = bgm;
-            _BGM.clip = BGMClips[(int)bgm];
-            _BGM.Play();
-        }
-    }
-
     public void PlaySE(int num)
     {
         SE se = (SE)num;
@@ -66,6 +56,15 @@ public class MusicManager : MonoBehaviour
             _se = se;
             _SE.clip = SEClips[(int)se];
             _SE.Play();
+        }
+    }
+    public void PlayBGM(BGM bgm)
+    {
+        if (bgm != BGM.None)
+        {
+            _bgm = bgm;
+            _BGM.clip = BGMClips[(int)bgm];
+            _BGM.Play();
         }
     }
 }

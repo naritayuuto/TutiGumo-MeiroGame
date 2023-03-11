@@ -259,7 +259,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.81780976, y: 1}
+    m_SensorSize: {x: 1.6816787, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -317,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1440749329, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1440749329, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Enabled
@@ -639,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b37634972d5a34a8a70721d2fb3989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 10
+  _moveSpeed: 11
   _turnSpeed: 3
 --- !u!114 &595496341
 MonoBehaviour:
@@ -1470,7 +1470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1440749329, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1440749329, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Enabled
@@ -1780,7 +1780,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25220
+  m_Name: pb_Mesh26288
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1944,7 +1944,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25256
+  m_Name: pb_Mesh26304
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3755,6 +3755,10 @@ PrefabInstance:
       propertyPath: _sceneLoader
       value: 
       objectReference: {fileID: 1038934831}
+    - target: {fileID: 1018468759, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1329958642, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3768,6 +3772,10 @@ PrefabInstance:
       value: 14.214936
       objectReference: {fileID: 0}
     - target: {fileID: 1329958645, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329958645, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Center.x
       value: -0.7816188
       objectReference: {fileID: 0}
@@ -3777,7 +3785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1440749329, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Speed
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1440749329, guid: 33b828b8f1c31334988de54e3fe47ee6, type: 3}
       propertyPath: m_Enabled

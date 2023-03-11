@@ -31,11 +31,12 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //ワールド座標へ変換
             dir = Camera.main.transform.TransformDirection(dir);
             dir.y = 0;
-
+            //滑らかに回転させる
             Quaternion targetRotation = Quaternion.LookRotation(dir);
-            this.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _turnSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _turnSpeed);
 
             Vector3 velo = dir.normalized * _moveSpeed; 
             velo.y = _rb.velocity.y;
