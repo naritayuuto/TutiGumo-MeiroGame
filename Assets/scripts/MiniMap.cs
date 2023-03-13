@@ -10,11 +10,9 @@ public class MiniMap : MonoBehaviour
     GameObject _miniMap = null;
 
     GameObject _player = null;
-    Rigidbody _playerRb = null;
     private void Start()
     {
         _player = GameManager.Instance.Player;
-        _playerRb = _player.GetComponent<Rigidbody>();
         _miniMap.SetActive(false);
     }
     // Update is called once per frame
@@ -24,7 +22,7 @@ public class MiniMap : MonoBehaviour
         {
             _miniMap.SetActive(true);
         }
-        if (!_playerRb.IsSleeping())
+        if (GameManager.Instance.PlayerController.PlayerMove)
         {
             transform.position = new Vector3(_player.transform.position.x, _posY, _player.transform.position.z);
         }
