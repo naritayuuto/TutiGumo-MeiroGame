@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager _instance = default;
-    [SerializeField]
+    [SerializeField, Header("タイトル、ゲーム、ゴール、デッド、の順"), Tooltip("現在のシーン名")]
+    string[] _sceneName;
+    [SerializeField,Header("マップ内のナビメッシュで動かしているオブジェクト"),Tooltip("マップ内のナビメッシュで動かしているオブジェクト")]
     GameObject[] _enemys; 
     [Tooltip("プレイヤーのオブジェクト")]
     GameObject _player = null;
@@ -16,9 +18,7 @@ public class GameManager : MonoBehaviour
     MusicManager _musicManager = null;
     [Tooltip("SceneLoaderが付いているオブジェクト")]
     SceneLoader _sceneLoader = null;
-
-    [SerializeField,Header("タイトル、ゲーム、ゴール、デッド、の順"), Tooltip("現在のシーン名")]
-    string[] _sceneName;
+    
     public static GameManager Instance { get => _instance; }
 
     public GameObject Player { get => _player; }
@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     public SceneLoader SceneLoader { get => _sceneLoader; }
     public string[] SceneName { get => _sceneName;}
-
 
     // Start is called before the first frame update
     private void Awake()
@@ -40,6 +39,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         //迷路の自動生成で大量のオブジェクトが発生しているので、Findを使っていない
         _player = GameObject.FindGameObjectWithTag("Player");

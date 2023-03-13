@@ -8,6 +8,7 @@ TagManager:
   - Goal
   - MusicManager
   - SceneLoader
+  - Enemy
   layers:
   - Default
   - TransparentFX
