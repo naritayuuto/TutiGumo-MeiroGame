@@ -8,8 +8,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _turnSpeed = 3f;
     Rigidbody _rb = default;
     Animator _anim = null;
-    /// <summary>入力された方向の XZ 平面でのベクトル</summary>
+    [Tooltip("入力された方向の XZ 平面でのベクトル")]
     Vector3 _dir;
+    bool _playerMove = default;
+    public bool PlayerMove { get => _playerMove;}
 
     void Start()
     {
@@ -22,23 +24,25 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
         float h = Input.GetAxisRaw("Horizontal");
 
-        Vector3 dir = Vector3.forward * v + Vector3.right * h;
+        _dir = Vector3.forward * v + Vector3.right * h;
 
-        if (dir == Vector3.zero)
+        if (_dir == Vector3.zero)
         {
             // 方向の入力が無いときはそれまでの方向保持
             _rb.velocity = new Vector3(0f, _rb.velocity.y, 0f);
+            _playerMove = false;
         }
         else
         {
+            _playerMove = true;
             //ワールド座標へ変換
-            dir = Camera.main.transform.TransformDirection(dir);
-            dir.y = 0;
+            _dir = Camera.main.transform.TransformDirection(_dir);
+            _dir.y = 0;
             //滑らかに回転させる
-            Quaternion targetRotation = Quaternion.LookRotation(dir);
+            Quaternion targetRotation = Quaternion.LookRotation(_dir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _turnSpeed);
 
-            Vector3 velo = dir.normalized * _moveSpeed; 
+            Vector3 velo = _dir.normalized * _moveSpeed; 
             velo.y = _rb.velocity.y;
             _rb.velocity = velo;   
         }
