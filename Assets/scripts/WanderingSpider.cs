@@ -43,7 +43,7 @@ public class WanderingSpider : MonoBehaviour
         if (_player)
         {
             float distance = Vector3.Distance(transform.position, _player.transform.position);//自身とplayerの距離
-            if (distance <= _playerPerceptionDis)//プレイヤーが近くにいたら
+            if (distance <= _playerPerceptionDis && GameManager.Instance.PlayerController.PlayerMove)//プレイヤーが近くにいて、動いていたら
             {
                 _countTime = 0;
                 _playerPerception = true;
@@ -63,7 +63,10 @@ public class WanderingSpider : MonoBehaviour
                     {
                         _countTime = 0;
                         _playerPerception = false;
-                        _musicM.PlayBGM(BGM.Stage);
+                        if (_musicM.Bgm != BGM.Stage)
+                        {
+                            _musicM.PlayBGM(BGM.Stage);
+                        }
                         _mode = 0;
                     }
                 }
@@ -84,7 +87,6 @@ public class WanderingSpider : MonoBehaviour
                 }
                 _agent.SetDestination(_targetPos);
                 break;
-
             case 1:
                 _agent.SetDestination(_player.transform.position);//プレイヤーに向かって進む
                 break;
