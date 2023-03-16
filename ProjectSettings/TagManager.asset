@@ -9,6 +9,7 @@ TagManager:
   - MusicManager
   - SceneLoader
   - Enemy
+  - Map
   layers:
   - Default
   - TransparentFX

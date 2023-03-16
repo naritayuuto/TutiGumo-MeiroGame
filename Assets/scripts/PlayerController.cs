@@ -42,15 +42,15 @@ public class PlayerController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(_dir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _turnSpeed);
 
-            Vector3 velo = _dir.normalized * _moveSpeed; 
-            velo.y = _rb.velocity.y;
-            _rb.velocity = velo;   
+            Vector3 move = _dir.normalized * _moveSpeed; 
+            move.y = _rb.velocity.y;
+            _rb.velocity = move;
         }
     }
     void LateUpdate()
     {
         Vector3 velocity = _rb.velocity;
         velocity.y = 0;
-        _anim.SetFloat("Speed", velocity.magnitude);
+        _anim.SetFloat("Speed", velocity.magnitude);//正規化して渡す。
     }
 }
