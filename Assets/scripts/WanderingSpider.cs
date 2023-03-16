@@ -6,6 +6,14 @@ using UnityEngine.AI;
 /// <summary>徘徊する蜘蛛</summary>
 public class WanderingSpider : MonoBehaviour
 {
+    [Tooltip("mode 巡回中")]
+    const int _patrol = 0;
+    [Tooltip("mode プレイヤー追尾中")]
+    const int _playerTracking = 1;
+    [Tooltip("0 == プレイヤー未発見、1 == プレイヤー発見")]
+    int _mode = 0;
+    [Tooltip("_pointsの要素数")]
+    int _pointsNumber = 0;
     [SerializeField, Tooltip("目標との間隔、余裕を持った値にする")]
     float _targetDis = 7f;
     [SerializeField, Tooltip("Playerを察知出来る間隔、余裕を持った値にする")]
@@ -13,10 +21,6 @@ public class WanderingSpider : MonoBehaviour
     [SerializeField, Tooltip("プレイヤーを追跡する時間")]
     float _trackingTime = 30f;
     float _countTime = 0f;
-    [Tooltip("_pointsの要素数")]
-    int _pointsNumber = 0;
-    [Tooltip("0 == プレイヤー未発見、1 == プレイヤー発見")]
-    int _mode = 0;
     [Tooltip("playerを見つけたらTrue")]
     bool _playerPerception = false;
     GameObject _player = null;
@@ -78,7 +82,7 @@ public class WanderingSpider : MonoBehaviour
         }
         switch (_mode)
         {
-            case 0:
+            case _patrol:
                 if (Vector3.Distance(transform.position, _targetPos) < _targetDis)
                 {
                     _pointsNumber++;
@@ -87,7 +91,7 @@ public class WanderingSpider : MonoBehaviour
                 }
                 _agent.SetDestination(_targetPos);
                 break;
-            case 1:
+            case _playerTracking:
                 _agent.SetDestination(_player.transform.position);//プレイヤーに向かって進む
                 break;
         }
